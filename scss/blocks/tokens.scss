@@ -465,6 +465,11 @@ a.custom-property-link {
     grid-column-gap: 12px;
     grid-row-gap: 12px;
   }
+
+  &.variant-stack-horizontal .stack {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 .content-block--token-container .stack .stack-item {

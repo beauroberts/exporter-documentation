@@ -782,6 +782,10 @@
           "key": "stack"
         },
         {
+          "name": "Stack (horizontal)",
+          "key": "stack-horizontal"
+        },
+        {
           "name": "Color stack (2 columns)",
           "key": "stack-2"
         },
