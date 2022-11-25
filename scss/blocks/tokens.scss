@@ -548,14 +548,36 @@ a.custom-property-link {
 .content-block--token-container .stack.variant-stack-horizontal .stack-item {
   flex: 1;
   height: calc(var(--contentVerticalRhythm) * 6);
+  transition: flex 400ms ease;
 
   .preview {
-    flex-direction: column;
-    align-items: center;
-    justify-content: end;
+    flex-direction: row;
+    align-items: end;
+    justify-content: start;
 
     .value {
-      display: none;
+      position: relative;
+      flex: 1;
+      height: var(--contentBodyLineHeight);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 400ms ease;
+      align-self: auto;
+
+      .token-value {
+        position: absolute;
+        right: 0;
+        line-height: var(--contentBodyLineHeight);
+      }
+    }
+  }
+
+  &:hover {
+    flex: 4;
+
+    .value {
+      opacity: 1;
+      pointer-events: initial;
     }
   }
 }

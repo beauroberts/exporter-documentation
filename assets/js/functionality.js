@@ -2,7 +2,7 @@
    Content menu tracking
 -------------------------- */
 
-$(window).on('load', function() {
+$(window).on('load', function () {
     let sections = [];
 
     // Store and restore menu scroll offset
@@ -14,7 +14,7 @@ $(window).on('load', function() {
     document.querySelectorAll('.sidebar-navigation').forEach(section => {
         section.addEventListener(
             'scroll',
-            function() {
+            function () {
                 localStorage.setItem('menu.scroll.position.top', section.scrollTop);
             },
             false
@@ -100,7 +100,7 @@ function loadVersions(url) {
     button.css('pointer-events', 'none');
 
     // Download JSON with version definitions for this particular design system (there is always one version file per design system at domain/version.json)
-    $.getJSON(url, function(data) {
+    $.getJSON(url, function (data) {
         // Get versions
         let versions = data.versions;
 
@@ -112,9 +112,8 @@ function loadVersions(url) {
             // Make the version that fits the current deploy target URL to be the selected one
             let currentVersion = window.location.href.indexOf(v.url) !== -1;
             menu.append(
-                `<a class="dropdown-item ${
-          currentVersion ? 'checked' : ''
-        }" href="https:${v.url}">${v.name}</a>`
+                `<a class="dropdown-item ${currentVersion ? 'checked' : ''
+                }" href="https:${v.url}">${v.name}</a>`
             );
             if (currentVersion) {
                 button.html(`${v.name}`);
@@ -123,7 +122,7 @@ function loadVersions(url) {
 
         // Enable interaction with the menu
         button.css('pointer-events', '');
-    }).fail(function() {
+    }).fail(function () {
         // If we for some reason fail to download the versions or if the versions don't exist yet, just hide the button, so it doesn't confuse users
         button.hidden = true;
     });
@@ -134,7 +133,7 @@ function loadVersions(url) {
 ------------------------------- */
 
 // Add listeners for actions
-window.sandboxEngine.listener = function(message) {
+window.sandboxEngine.listener = function (message) {
     // Remove sandbox loaders when loaded correctly
     if (message.status === 'done' || message.status === 'error') {
         $(`.sandbox-loader-container[data-target="${message.sandboxId}"]`).remove();
@@ -184,7 +183,7 @@ function loadSandboxes(url) {
     Tooltips
 ------------------------------- */
 
-$(function() {
+$(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -192,7 +191,7 @@ $(function() {
     Sandbox helpers
 ------------------------------- */
 
-$('[data-toggle="copy-from-sandbox"]').click(function(event) {
+$('[data-toggle="copy-from-sandbox"]').click(function (event) {
     // Get code of the sandbox
     event.preventDefault();
     const sandboxId = $(this).attr('data-target');
@@ -207,14 +206,14 @@ $('[data-toggle="copy-from-sandbox"]').click(function(event) {
     });
 });
 
-$('[data-toggle="open-in-sandbox"]').click(async function(event) {
+$('[data-toggle="open-in-sandbox"]').click(async function (event) {
     // Get code of the sandbox
     event.preventDefault();
     const sandboxId = $(this).attr('data-target');
     await window.sandboxEngine.openInSandbox(sandboxId);
 });
 
-$('[data-toggle="reset-sandbox"]').click(async function(event) {
+$('[data-toggle="reset-sandbox"]').click(async function (event) {
     // Reset sandbox code
     event.preventDefault();
     const sandboxId = $(this).attr('data-target');
@@ -230,7 +229,7 @@ $('[data-toggle="reset-sandbox"]').click(async function(event) {
     Copy a link to heading
 ------------------------------- */
 
-$('[data-copy-url="true"]').click(function(event) {
+$('[data-copy-url="true"]').click(function (event) {
     // Get code of the sandbox
     event.preventDefault();
     const text = $(this).attr('href');
@@ -250,7 +249,7 @@ $('[data-copy-url="true"]').click(function(event) {
     Theme switching & mode preservation
 ------------------------------- */
 
-$('.switch-theme').on('click', function(e) {
+$('.switch-theme').on('click', function (e) {
     // Toggle the dark / light mode when clicking the mode selector
     $('body').toggleClass('dark');
     e.preventDefault();
@@ -267,16 +266,16 @@ $('.switch-theme').on('click', function(e) {
     Storybook handling
 ------------------------------- */
 
-$(document).ready(function() {
+$(document).ready(function () {
     // Ping storybook for each frame embedding it and check if it is reachable, if so, show the content,
     // otherwise show formatted error message
     document.querySelectorAll('iframe.storybook').forEach(iframe => {
         let src = iframe.getAttribute('src');
         fetch(src, {
-                method: 'GET',
-                cache: 'no-cache',
-                mode: 'no-cors'
-            })
+            method: 'GET',
+            cache: 'no-cache',
+            mode: 'no-cors'
+        })
             .then(_ => {
                 // Do nothing for the correct response, as we can't detect whether
                 // the page was truly reachable and contains storybook due to CORS protection
@@ -296,22 +295,22 @@ $(document).ready(function() {
     Sidebar menu for mobile
 ------------------------------- */
 
-$('#sidebarCollapse').on('click', function(e) {
+$('#sidebarCollapse').on('click', function (e) {
     $('#side-navigation').toggleClass('nav-open');
     e.preventDefault();
 });
 
-$(document).on('click', '.nav-open .bg-sidebar', function(e) {
+$(document).on('click', '.nav-open .bg-sidebar', function (e) {
     $('#side-navigation').toggleClass('nav-open');
     e.preventDefault();
 });
 
-$('#mobile-menu-selector').on('click', function(e) {
+$('#mobile-menu-selector').on('click', function (e) {
     $('#side-navigation').removeClass('nav-open');
     e.preventDefault();
 });
 
-$('#versions-selector').on('click', function(e) {
+$('#versions-selector').on('click', function (e) {
     $('#side-navigation').removeClass('nav-open');
     e.preventDefault();
 });
@@ -321,22 +320,115 @@ $('#versions-selector').on('click', function(e) {
    Component health status overlay
 -------------------------- */
 
-$(document).ready(function() {
-    $('.content-block--component-health').on('click', function(e) {
+$(document).ready(function () {
+    $('.content-block--component-health').on('click', function (e) {
         const blockId = $(this).data('block-id');
         // Toggle the overlay
         $('#overlay-' + blockId).toggleClass('d-none');
         e.preventDefault();
     });
 
-    $('.health-overlay').on('click', function(e) {
+    $('.health-overlay').on('click', function (e) {
         // Toggle the overlay
         $(this).toggleClass('d-none');
         e.preventDefault();
     });
 
-    $('.health-overlay-content').on('click', function(e) {
+    $('.health-overlay-content').on('click', function (e) {
         // Prevent closing the window
         e.stopPropagation();
     });
 });
+
+/*------------------------
+   Horizontal stack interactions
+-------------------------- */
+
+// $(document).ready(function () {
+//     const startAnimation = (duration, iterFunc, doneFunc) => {
+//         let animationFrame;
+//         let start;
+//         function step(timestamp) {
+//             if (start === undefined) {
+//                 start = timestamp;
+//             }
+
+//             const elapsed = Math.min(duration, timestamp - start);
+//             const d = elapsed / duration;
+
+//             iterFunc(d * d * (3 - 2 * d));
+
+//             if (elapsed < duration) {
+//                 animationFrame = requestAnimationFrame(step);
+//                 return;
+//             }
+
+//             doneFunc();
+//         }
+
+//         animationFrame = requestAnimationFrame(step);
+
+//         return function () {
+//             cancelAnimationFrame(animationFrame);
+//         };
+//     };
+
+//     const runningAnimations = new Map();
+//     const duration = 400;
+
+//     $('.stack.variant-stack-horizontal .stack-item')
+//         .on('mouseenter', function (e) {
+//             // cancel previous animations, if there are any
+//             runningAnimations.get(this)?.();
+
+//             const { width: currentWidth } = this.getBoundingClientRect();
+
+//             this.style.flex = "none";
+//             this.style.width = `${currentWidth}px`;
+
+//             const cancelAnim = startAnimation(
+//                 duration,
+//                 t => {
+//                     this.style.width = `${(1 - t) * currentWidth + t * 160}px`;
+//                 },
+//                 () => {
+//                     if (runningAnimations.get(this) === cancelAnim) {
+//                         runningAnimations.delete(this);
+//                     }
+//                 }
+//             );
+
+//             runningAnimations.set(this, cancelAnim);
+//         })
+//         .on('mouseleave', function () {
+//             // cancel previous animations, if there are any
+//             runningAnimations.get(this)?.();
+
+//             const { width: currentWidth } = this.getBoundingClientRect();
+
+//             this.style.flex = "1";
+//             this.style.width = "auto";
+
+//             const { width: targetWidth } = this.getBoundingClientRect();
+
+//             this.style.flex = "none";
+//             this.style.width = `${currentWidth}px`;
+
+//             const cancelAnim = startAnimation(
+//                 duration,
+//                 t => {
+//                     this.style.width = `${(1 - t) * currentWidth + t * targetWidth}px`;
+//                 },
+//                 () => {
+//                     this.style.flex = "1";
+//                     this.style.width = "auto";
+
+//                     if (runningAnimations.get(this) === cancelAnim) {
+//                         runningAnimations.delete(this);
+//                     }
+//                 }
+//             );
+
+//             runningAnimations.set(this, cancelAnim);
+//         });
+// });

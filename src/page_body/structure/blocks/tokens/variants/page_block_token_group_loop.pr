@@ -28,7 +28,7 @@
                 {* Render all tokens *}
                 {[ for token in tokens ]}
                     {[ if ((token.tokenType !== "Shadow") || ((token.tokenType === "Shadow") && (token.isVirtual === false))) ]}
-                        {[ inject "page_block_token_variant_stack_item" context ({"token": token, "block": block}) /]}
+                        {[ inject "page_block_token_variant_stack_item" context ({"token": token, "block": block, "variant": variant}) /]}
                     {[/]}    
                 {[/]}
             </div>

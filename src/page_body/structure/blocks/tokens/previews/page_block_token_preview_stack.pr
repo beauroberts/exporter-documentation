@@ -1,5 +1,6 @@
 {[ const token = context.token /]}
 {[ const theme = context.theme /]}
+{[ const variant = context.variant /]}
 
 {[ if token.tokenType.equals("Color") ]}
 
@@ -9,6 +10,10 @@
     <div class="preview is-color{[ if colorLightnessCheck ]} inverted-text{[/]}{[ if whiteCheck ]} bordered{[/]}" style="background-color: #{{ token.value.hex }};">
         {[ inject "page_block_token_reference_badge" context token /]}
         {[ inject "page_block_token_theme_badge" context theme /]}
+
+        {[ if (variant === "stack-horizontal") ]}
+            <div class="copy-icon" data-copy=#{{ token.value.hex }} />
+        {[/]}
 
         {[ if (theme === null) ]}
             <div class="name">
