@@ -457,6 +457,11 @@ a.custom-property-link {
 .content-block--token-group-container {
   .stack {
     border-radius: var(--borderRadiusLarge);
+
+    &.variant-stack-horizontal {
+      display: flex;
+      flex-direction: row;
+    }
   }
 
   &.variant-stack-2 {
@@ -464,11 +469,6 @@ a.custom-property-link {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 12px;
     grid-row-gap: 12px;
-  }
-
-  &.variant-stack-horizontal .stack {
-    display: flex;
-    flex-direction: row;
   }
 }
 
@@ -545,13 +545,18 @@ a.custom-property-link {
   }
 }
 
-.content-block--token-container .stack .stack-item .value {
-  text-align: right;
-  font-size: 13px;
-  align-self: center;
+.content-block--token-container .stack.variant-stack-horizontal .stack-item {
+  flex: 1;
+  height: calc(var(--contentVerticalRhythm) * 6);
 
-  .token-value {
-    display: block;
+  .preview {
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+
+    .value {
+      display: none;
+    }
   }
 }
 
@@ -563,9 +568,25 @@ a.custom-property-link {
   }
 }
 
+.content-block--token-container .stack .stack-item .value {
+  text-align: right;
+  font-size: 13px;
+  align-self: center;
+
+  .token-value {
+    display: block;
+  }
+}
+
 .content-block--token-container .stack .stack-item:first-child,
 .content-block--token-container .stack .stack-item:first-child .preview {
   border-top-left-radius: var(--borderRadiusLarge);
+}
+
+.content-block--token-container .stack:not(.variant-stack-horizontal) .stack-item:first-child,
+.content-block--token-container .stack:not(.variant-stack-horizontal) .stack-item:first-child .preview,
+.content-block--token-container .stack.variant-stack-horizontal .stack-item:last-child,
+.content-block--token-container .stack.variant-stack-horizontal .stack-item:last-child .preview {
   border-top-right-radius: var(--borderRadiusLarge);
 }
 
@@ -581,8 +602,16 @@ a.custom-property-link {
 }
 
 .content-block--token-container .stack .stack-item:last-child,
-.content-block--token-container .stack .stack-item:last-child .preview {
+.content-block--token-container .stack .stack-item:last-child .preview,
+.content-block--token-container .stack.variant-stack-horizontal .stack-item:first-child,
+.content-block--token-container .stack.variant-stack-horizontal .stack-item:first-child .preview {
   border-bottom-left-radius: var(--borderRadiusLarge);
+}
+
+.content-block--token-container .stack .stack-item:last-child,
+.content-block--token-container .stack .stack-item:last-child .preview,
+.content-block--token-container .stack.variant-stack-horizontal .stack-item:last-child,
+.content-block--token-container .stack.variant-stack-horizontal .stack-item:last-child .preview {
   border-bottom-right-radius: var(--borderRadiusLarge);
 }
 
