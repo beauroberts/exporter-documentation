@@ -292,6 +292,13 @@ $(document).ready(function () {
 });
 
 /*-----------------------------
+    Read cookie
+------------------------------- */
+const getCookieValue = (name) => (
+    document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+  )
+
+/*-----------------------------
     Sidebar menu for mobile
 ------------------------------- */
 
