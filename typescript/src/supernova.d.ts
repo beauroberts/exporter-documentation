@@ -381,6 +381,7 @@ declare global {
   type DocumentationPageBlockImage = DocumentationPageBlock & {
     url: string | null
     caption: string | null
+    height: number | null
     alignment: ContentAlignment
   }
 

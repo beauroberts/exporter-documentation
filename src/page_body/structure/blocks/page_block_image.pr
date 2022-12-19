@@ -25,7 +25,7 @@
 
 <div class="content-block content-block--image {{ alignClass }}" id="{{ getSearchIDString(block.id) }}">
 {* Add <a class="popup-img" href="{{ block.url }}"> <img> </a> if you want to enable lightbox-functionality *}
-    <img src="{{ block.url }}" class="{{ imgClass }}" alt="{{ block.caption }}" />
+    <img src="{{ block.url }}" class="{{ imgClass }}" alt="{{ block.caption }}" {[ if block.height ]}style="height: {{block.height}}px; object-fit: contain; object-position: 50% 50%;"{[/]}/>
     
 {* Add caption if set *}
 {[ if block.caption ]}
